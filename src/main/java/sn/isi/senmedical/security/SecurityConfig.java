@@ -49,11 +49,14 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
-    // Autorise le frontend Angular (localhost:4200) a appeler l'API Spring Boot (localhost:8080)
+    // Autorise le frontend Angular (local ET deploye sur Vercel) a appeler l'API Spring Boot
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedOrigins(List.of(
+                "http://localhost:4200",
+                "https://senmedical-frontend-fi0oxvbzl-sen-medical.vercel.app"
+        ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
